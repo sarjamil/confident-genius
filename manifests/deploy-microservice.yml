@@ -2,26 +2,26 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
     labels:
-        app: mild-temper-microservice
+        app: confident-genius-microservice
         stack: frontend
         source: demo
-    name: mild-temper-microservice
+    name: confident-genius-microservice
     namespace: microservices
 spec:
     replicas: 5
     selector:
         matchLabels:
-            run: mild-temper-microservice
+            run: confident-genius-microservice
     template:
         metadata:
             labels:
-                app: mild-temper-microservice
-                run: mild-temper-microservice
+                app: confident-genius-microservice
+                run: confident-genius-microservice
                 source: demo
         spec:
             containers:
-                -   image: 219099013464.dkr.ecr.us-west-2.amazonaws.com/mild-temper-microservice
-                    name: mild-temper-microservice
+                -   image: 219099013464.dkr.ecr.us-west-2.amazonaws.com/confident-genius-microservice
+                    name: confident-genius-microservice
                     ports:
                         -   name: web
                             containerPort: 8080
@@ -31,14 +31,14 @@ kind: Service
 apiVersion: v1
 metadata:
     labels:
-        app: mild-temper-microservice-service
+        app: confident-genius-microservice-service
         stack: frontend
-    name: mild-temper-microservice-service
+    name: confident-genius-microservice-service
     namespace: microservices
 spec:
     selector:
         source: demo
-        app: mild-temper-microservice
+        app: confident-genius-microservice
     ports:
         -   name: web
             protocol: TCP
@@ -54,15 +54,15 @@ metadata:
         stack: frontend
     annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /$2
-    name: mild-temper-ingress
+    name: confident-genius-ingress
     namespace: microservices
 spec:
     rules:
         -   http:
                 paths:
-                    -   path: /mild-temper(/|$)(.*)
+                    -   path: /confident-genius(/|$)(.*)
                         backend:
-                            serviceName: mild-temper-microservice-service
+                            serviceName: confident-genius-microservice-service
                             servicePort: 30201
 
 
